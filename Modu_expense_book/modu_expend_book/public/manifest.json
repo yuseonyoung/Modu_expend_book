@@ -1,0 +1,23 @@
+{
+    "name": "modu_expend_book",
+    "short_name": "modu_expend_book",
+    "description": "가계부 어플 제작",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#000000",
+    "icons": [
+      {
+        "src": "/icon/192_logo.png",
+        "sizes": "192x191",
+        "type": "image/png",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "/icon/512_logo.png",
+        "sizes": "512x509",
+        "type": "image/png"
+      }
+    ]
+  }
+  
