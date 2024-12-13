@@ -7,7 +7,7 @@ export default function Header() {
     <header className="flex justify-between items-center mb-8">
       <div className="flex items-center gap-2">
          <Image 
-          src="../icon/logo.png" 
+          src="/icon/logo.png" 
           alt="Logo" 
           width={32} 
           height={32}
