@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader} from '@/components/ui/card';
 
 interface CalendarProps {
   data?: Record<string, number>;
@@ -72,9 +72,9 @@ const Calendar = ({ data = {}, onDateSelect }: CalendarProps) => {
     setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1));
   };
 
-  const formatDate = (date: Date): string => {
+  /* const formatDate = (date: Date): string => {
     return `${date.getFullYear()} ${date.toLocaleString('default', { month: 'long' })}`;
-  };
+  }; */
 
   const handleDateClick = (date: Date, value?: number) => {
     setSelectedDate(date);

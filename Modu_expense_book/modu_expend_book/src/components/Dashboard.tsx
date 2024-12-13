@@ -13,14 +13,15 @@ export default function Dashboard() {
 
   // 샘플 지출 데이터
   const expenseData: Record<string, number> = {
-    '2024-01-01': 125.50,
-    '2024-01-02': 75.20,
-    '2024-01-03': 50.30,
+    '2024-12-14': 125.50,
+    '2024-12-15': 75.20,
+    '2024-12-16': 50.30,
   }
 
-  const handleDateSelect = (date: Date, value?: number) => {
+  const handleDateSelect = (date: Date) => {
     setSelectedDate(date)
   }
+  
 
   return (
     <div className="container mx-auto px-6 py-8">

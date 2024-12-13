@@ -1,0 +1,47 @@
+/******************************* 첫 설치후  Next.js 프로젝트 세팅법 *********************/
+1. nvm 설치 방법
+https://github.com/coreybutler/nvm-windows/releases 에서 setup-exe 다운후 실행
+
+2. cmd 접속
+  1) nvm install 18.19.0
+  2) nvm use 18.19.0 
+  3) node -v
+
+3. Nextjs 프로젝트설치
+npx create-next-app@latest modu_expend_book
+
+4. module 설치
+npm install @ducanh2912/next-pwa
+npm install -D webpack
+
+5. 파일생성
+  1) next.config.js
+  2) public/manifest.json 
+  3) src/app/layout.tsx 
+
+/**********************************************************************************************/
+
+
+/*****************************GIT 에서 코드를 클론한경우*********************************/
+ 1. cmd 접속
+  1) nvm install 18.19.0
+  2) nvm use 18.19.0 
+  3) node -v
+
+2. module 설치
+npm install @ducanh2912/next-pwa
+npm install -D webpack
+
+/**********************************************************************************************/
+
+/***************************** 추가 라이브러리 ********************************************/
+
+// dashboard library
+npm install @fortawesome/fontawesome-svg-core
+npm install @fortawesome/free-solid-svg-icons
+npm install @fortawesome/react-fontawesome
+npm install react-big-calendar moment
+npm install --save-dev @types/react-big-calendar @types/moment
+npm install echarts @types/echarts
+
+/***********************************************************************************************/
