@@ -6,12 +6,6 @@ import { faShoppingCart, faUtensils } from '@fortawesome/free-solid-svg-icons'
 interface ExpenseListProps {
   selectedDate: Date | null;
 }
-// any 타입 대신 구체적인 타입 지정
-interface DateCellWrapperProps {
-    children: React.ReactNode;
-    value: Date;
-  }
-  
 
 interface Expense {
   id: number;
