@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { Card, CardContent, CardHeader} from '@/components/ui/card';
+import { Card, CardContent, CardHeader} from '@/pages/dashboard/ui/card';
 
 interface CalendarProps {
   data?: Record<string, number>;
