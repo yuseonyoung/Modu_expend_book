@@ -21,27 +21,27 @@ export default function ExpenseList({ selectedDate }: ExpenseListProps) {
 
   // 샘플 지출 데이터
   const expenses: Record<string, Expense[]> = {
-    '2024-01-01': [
+    '2024-12-15': [
       {
         id: 1,
-        category: 'Groceries',
-        subCategory: 'Supermarket',
+        category: '식비',
+        subCategory: '홈플러스',
         amount: 125.50,
         icon: faShoppingCart
       }
     ],
-    '2024-01-02': [
+    '2024-12-16': [
       {
         id: 2,
-        category: 'Groceries',
-        subCategory: 'Supermarket',
+        category: '식비',
+        subCategory: '이마트',
         amount: 75.20,
         icon: faShoppingCart
       },
       {
         id: 3,
-        category: 'Dining',
-        subCategory: 'Restaurant',
+        category: '누오보나폴리',
+        subCategory: '레스토랑',
         amount: 50.30,
         icon: faUtensils
       }
@@ -52,8 +52,8 @@ export default function ExpenseList({ selectedDate }: ExpenseListProps) {
   const dayExpenses = expenses[dateKey] || [];
 
   return (
-    <div className="bg-[#1a1f2e] rounded-lg p-6">
-      <h3 className="text-xl font-semibold mb-4 text-white">
+    <div className="widget">
+      <h3 className="text-xl font-semibold mb-4 text-foreground">
         {selectedDate.toLocaleDateString('ko-KR', {
           weekday: 'short',
           year: 'numeric',
@@ -65,24 +65,24 @@ export default function ExpenseList({ selectedDate }: ExpenseListProps) {
         {dayExpenses.map((expense) => (
           <div 
             key={expense.id}
-            className="flex items-center justify-between p-4 bg-[#252b3d] rounded-lg hover:bg-[#2f3649] transition-colors"
+            className="flex items-center justify-between p-4 bg-[#E6F3FF] rounded-lg hover:bg-[#D6E9FF] transition-colors"
           >
             <div className="flex items-center gap-4">
-              <div className="w-10 h-10 bg-[#3b82f6] rounded-full flex items-center justify-center">
+              <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
                 <FontAwesomeIcon icon={expense.icon} className="text-white" />
               </div>
               <div>
-                <div className="font-medium text-white">{expense.category}</div>
-                <div className="text-sm text-gray-400">{expense.subCategory}</div>
+                <div className="font-bold text-foreground">{expense.category}</div>
+                <div className="text-sm text-muted-foreground">{expense.subCategory}</div>
               </div>
             </div>
-            <div className="text-lg font-medium text-white">
+            <div className="text-lg font-bold text-foreground">
               ${expense.amount.toFixed(2)}
             </div>
           </div>
         ))}
         {dayExpenses.length === 0 && (
-          <div className="text-center text-gray-400 py-4">
+          <div className="text-center text-muted-foreground py-4">
             이 날짜의 지출 내역이 없습니다
           </div>
         )}

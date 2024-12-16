@@ -1,9 +1,14 @@
-import Dashboard from '../pages/dashboard/Dashboard'
+'use client'
+
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 export default function Home() {
-  return (
-    <main className="bg-gray-900 text-white min-h-screen">
-      <Dashboard />
-    </main>
-  )
+  const router = useRouter()
+
+  useEffect(() => {
+    router.push('/dashboard')
+  }, [router])
+
+  return null
 }

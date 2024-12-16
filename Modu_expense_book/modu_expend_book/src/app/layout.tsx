@@ -1,15 +1,16 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from 'next/font/google'
 import './globals.css'
+import { Providers } from './providers'
 
 export const metadata: Metadata = {
-  title: "PWA App",
-  description: "My PWA Application",
+  title: "모두의 가계부",
+  description: "절약해보자",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "PWA App"
+    title: "모두의 가계부"
   },
 };
 
@@ -28,8 +29,14 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ko">
-      <body className={inter.className}>{children}</body>
+    <html lang="ko" suppressHydrationWarning>
+      <body className={`${inter.className} bg-background min-h-screen max-w-screen overflow-x-hidden`}>
+        <Providers>
+          <div className="w-full max-w-full mx-auto">
+            {children}
+          </div>
+        </Providers>
+      </body>
     </html>
   );
 }

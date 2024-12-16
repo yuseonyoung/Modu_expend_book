@@ -2,23 +2,23 @@
 
 import { useEffect, useRef } from 'react'
 import * as echarts from 'echarts/core'
-import { LineChart } from 'echarts/charts'
+import { PieChart } from 'echarts/charts'
 import { 
   TooltipComponent, 
-  GridComponent 
+  LegendComponent 
 } from 'echarts/components'
 import { CanvasRenderer } from 'echarts/renderers'
 import type { EChartsOption } from 'echarts'
 
 // 필요한 컴포넌트 등록
 echarts.use([
-  LineChart,
+  PieChart,
   TooltipComponent,
-  GridComponent,
+  LegendComponent,
   CanvasRenderer
 ])
 
-export default function MonthlyOverview() {
+export default function CategoryBreakdown() {
   const chartRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -28,23 +28,24 @@ export default function MonthlyOverview() {
       const option: EChartsOption = {
         animation: false,
         tooltip: {
-          trigger: 'axis'
-        },
-        xAxis: {
-          type: 'category',
-          data: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
-          axisLabel: { color: '#fff' }
-        },
-        yAxis: {
-          type: 'value',
-          axisLabel: { color: '#fff' }
+          trigger: 'item'
         },
         series: [{
-          data: [820, 932, 901, 934],
-          type: 'line',
-          smooth: true,
-          lineStyle: { color: '#6366f1' },
-          itemStyle: { color: '#6366f1' }
+          type: 'pie',
+          radius: '70%',
+          data: [
+            { value: 1048, name: '식비' },
+            { value: 735, name: '공과금' },
+            { value: 580, name: '보험비' },
+            { value: 484, name: '여가생활' }
+          ],
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          }
         }]
       }
 
@@ -64,8 +65,8 @@ export default function MonthlyOverview() {
   }, [])
 
   return (
-    <div className="bg-gray-800 rounded-lg p-6 mb-6">
-      <h3 className="text-xl font-semibold mb-4">Monthly Overview</h3>
+    <div className="widget">
+      <h3 className="text-xl font-semibold mb-4 text-foreground">카테고리별 지출</h3>
       <div ref={chartRef} className="h-64"></div>
     </div>
   )

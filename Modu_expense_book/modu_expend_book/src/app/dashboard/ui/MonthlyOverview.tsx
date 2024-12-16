@@ -2,23 +2,23 @@
 
 import { useEffect, useRef } from 'react'
 import * as echarts from 'echarts/core'
-import { PieChart } from 'echarts/charts'
+import { LineChart } from 'echarts/charts'
 import { 
   TooltipComponent, 
-  LegendComponent 
+  GridComponent 
 } from 'echarts/components'
 import { CanvasRenderer } from 'echarts/renderers'
 import type { EChartsOption } from 'echarts'
 
 // 필요한 컴포넌트 등록
 echarts.use([
-  PieChart,
+  LineChart,
   TooltipComponent,
-  LegendComponent,
+  GridComponent,
   CanvasRenderer
 ])
 
-export default function CategoryBreakdown() {
+export default function MonthlyOverview() {
   const chartRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -28,24 +28,23 @@ export default function CategoryBreakdown() {
       const option: EChartsOption = {
         animation: false,
         tooltip: {
-          trigger: 'item'
+          trigger: 'axis'
+        },
+        xAxis: {
+          type: 'category',
+          data: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+          axisLabel: { color: '#000' }
+        },
+        yAxis: {
+          type: 'value',
+          axisLabel: { color: '#000' }
         },
         series: [{
-          type: 'pie',
-          radius: '70%',
-          data: [
-            { value: 1048, name: 'Groceries' },
-            { value: 735, name: 'Dining' },
-            { value: 580, name: 'Transportation' },
-            { value: 484, name: 'Entertainment' }
-          ],
-          emphasis: {
-            itemStyle: {
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.5)'
-            }
-          }
+          data: [820, 932, 901, 934],
+          type: 'line',
+          smooth: true,
+          lineStyle: { color: '#6366f1' },
+          itemStyle: { color: '#6366f1' }
         }]
       }
 
@@ -65,8 +64,8 @@ export default function CategoryBreakdown() {
   }, [])
 
   return (
-    <div className="bg-gray-800 rounded-lg p-6">
-      <h3 className="text-xl font-semibold mb-4">Category Breakdown</h3>
+    <div className="widget mb-6">
+      <h3 className="text-xl font-semibold mb-4 text-foreground">주별 카테고리별 지출</h3>
       <div ref={chartRef} className="h-64"></div>
     </div>
   )
