@@ -64,9 +64,9 @@ export default function MonthlyOverview() {
   }, [])
 
   return (
-    <div className="widget mb-6">
-      <h3 className="text-xl font-semibold mb-4 text-foreground">주별 카테고리별 지출</h3>
-      <div ref={chartRef} className="h-64"></div>
+    <div className="widget mb-2">
+      <h3 className="text-xl font-semibold mb-2 text-foreground">주별 카테고리별 지출</h3>
+      <div ref={chartRef} className="h-52"></div>
     </div>
   )
 }

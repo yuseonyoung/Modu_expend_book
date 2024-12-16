@@ -96,7 +96,7 @@ const Calendar = ({ data = {}, onDateSelect}: CalendarProps)  => {
 
   return (
     // Calendar.tsx
-<Card className="w-full h-full border-none widget">
+<Card className="w-full min-h-[817px] max-h-[817px] border-none widget">
   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
     {/* 헤더 내용 */}
 	<div className="flex items-center space-x-4">
@@ -154,7 +154,7 @@ const Calendar = ({ data = {}, onDateSelect}: CalendarProps)  => {
           key={index}
           onClick={() => handleDateClick(date, value)}
           className={`
-            p-3 rounded-lg flex flex-col items-start h-[118px]
+            p-3 rounded-lg flex flex-col items-start h-[103px]
             ${isCurrentMonth ? 'text-foreground' : 'text-muted-foreground'}
             ${selectedDate && date.toDateString() === selectedDate.toDateString()
               ? 'bg-[#E6F3FF] border border-[#3b82f6]'

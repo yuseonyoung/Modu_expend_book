@@ -66,8 +66,8 @@ export default function CategoryBreakdown() {
 
   return (
     <div className="widget">
-      <h3 className="text-xl font-semibold mb-4 text-foreground">카테고리별 지출</h3>
-      <div ref={chartRef} className="h-64"></div>
+      <h3 className="text-xl font-semibold mb-1 text-foreground">카테고리별 지출</h3>
+      <div ref={chartRef} className="h-56"></div>
     </div>
   )
 }
