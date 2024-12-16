@@ -15,15 +15,16 @@ interface DayInfo {
   value?: number;
 }
 
-const Calendar = ({ data = {}, onDateSelect}: CalendarProps)  => {
+const Calendar = ({ data = {}, onDateSelect, className }: CalendarProps)  => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
   
   useEffect(() => {
-    const today = new Date();
-    const todayKey = formatDateKey(today);
-    onDateSelect?.(today, data[todayKey]);
-  }, [data, onDateSelect]);
+    if (selectedDate) {
+      const todayKey = formatDateKey(selectedDate);
+      onDateSelect?.(selectedDate, data[todayKey]);
+    }
+  }, []);
   
 
   const formatDateKey = (date: Date): string => {

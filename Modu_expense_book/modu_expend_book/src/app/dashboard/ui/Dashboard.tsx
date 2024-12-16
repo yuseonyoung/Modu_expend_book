@@ -25,9 +25,9 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="w-full min-h-screen px-4 py-2 md:container md:mx-auto md:px-6 md:py-4">
+    <div className="w-full min-h-[90vh] px-4 py-2 md:container md:mx-auto md:px-6 md:py-4">
       <Header />
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 h-[calc(85vh-80px)]">
         <div className="lg:col-span-2">
           <Calendar data={expenseData} onDateSelect={handleDateSelect} />
         </div>
