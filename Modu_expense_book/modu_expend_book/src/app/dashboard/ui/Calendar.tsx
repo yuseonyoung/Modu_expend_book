@@ -15,7 +15,7 @@ interface DayInfo {
   value?: number;
 }
 
-const Calendar = ({ data = {}, onDateSelect, className }: CalendarProps)  => {
+const Calendar = ({ data = {}, onDateSelect}: CalendarProps)  => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
   
