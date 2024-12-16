@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import { Plus } from 'lucide-react'
 
 interface AddExpenseButtonProps {
@@ -8,15 +7,10 @@ interface AddExpenseButtonProps {
 }
 
 export default function AddExpenseButton({ onClick }: AddExpenseButtonProps) {
-  const [position, setPosition] = useState({ x: 0, y: 0 })
-
   const handleClick = (e: React.MouseEvent) => {
-  const rect = e.currentTarget.getBoundingClientRect();
-  const x = rect.left;
-  const y = rect.top;
-  setPosition({ x, y });
-  onClick(x, y);  // x, y 값을 전달
-}
+    const rect = e.currentTarget.getBoundingClientRect();
+    onClick(rect.left, rect.top);
+  }
 
   return (
     <button 

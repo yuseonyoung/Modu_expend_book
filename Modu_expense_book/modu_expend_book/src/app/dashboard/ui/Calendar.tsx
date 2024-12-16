@@ -23,7 +23,8 @@ const Calendar = ({ data = {}, onDateSelect}: CalendarProps)  => {
     const today = new Date();
     const todayKey = formatDateKey(today);
     onDateSelect?.(today, data[todayKey]);
-  }, []);
+  }, [data, onDateSelect]);
+  
 
   const formatDateKey = (date: Date): string => {
     return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
