@@ -14,9 +14,9 @@ export default function Dashboard() {
   // const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 })
   
   const expenseData: Record<string, number> = {
-    '2024-12-14': 125.5,
-    '2024-12-15': 75.2,
-    '2024-12-16': 50.3,
+    '2024-12-16': 1125000,
+    '2024-12-17': 75200,
+    '2024-12-18': 50300,
   }
 
   const handleDateSelect = (date: Date) => {
