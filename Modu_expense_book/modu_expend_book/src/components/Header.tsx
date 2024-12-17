@@ -19,7 +19,7 @@ export default function Header() {
         />
         <h1 className="text-lg sm:text-2xl font-bold text-black">모두의 가계부</h1>
       </div>
-      
+
       {/* 데스크탑/태블릿 네비게이션 */}
       <nav className="hidden md:flex gap-4">
         <a href="#" className="text-black text-lg font-bold hover:text-gray-300">Home</a>
@@ -28,7 +28,7 @@ export default function Header() {
       </nav>
 
       {/* 모바일 메뉴 버튼 */}
-      <button 
+      <button
         className="md:hidden p-2"
         onClick={() => setIsMenuOpen(true)}
       >
@@ -55,11 +55,11 @@ export default function Header() {
                 </button>
               </div>
               <div className="flex gap-2 mt-3">
-              <nav className="flex gap-2">
-                <a href="#" className="text-black text-lg font-bold hover:text-gray-300">Home</a>
-                <a href="#" className="text-black text-lg font-bold hover:text-gray-300">보고서</a>
-                <a href="#" className="text-black text-lg font-bold hover:text-gray-300">마이페이지</a>
-              </nav>
+                <nav className="flex gap-2">
+                  <a href="#" className="text-black text-lg font-bold hover:text-gray-300">Home</a>
+                  <a href="#" className="text-black text-lg font-bold hover:text-gray-300">보고서</a>
+                  <a href="#" className="text-black text-lg font-bold hover:text-gray-300">마이페이지</a>
+                </nav>
 
               </div>
             </div>

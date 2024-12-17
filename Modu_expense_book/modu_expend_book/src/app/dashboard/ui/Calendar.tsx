@@ -152,29 +152,29 @@ const Calendar = ({ data = {}, onDateSelect }: CalendarProps) => {
               onClick={() => handleDateClick(date, value)}
               className={`
                 flex flex-col items-start justify-start
-                h-[80px] sm:h-[80px] lg:h-[90px] md:h-full
+                h-[90px] sm:h-[90px] lg:h-[90px] md:h-full
                 
                 ${isCurrentMonth ? 'text-foreground' : 'text-muted-foreground'}
                 ${selectedDate && date.toDateString() === selectedDate.toDateString()
-                            ? 'bg-[#E6F3FF] border border-[#3b82f6]'
-                            : 'hover:bg-[#D6E9FF]'}
+                  ? 'bg-[#E6F3FF] border border-[#3b82f6]'
+                  : 'hover:bg-[#D6E9FF]'}
               `}
             >
               <span className="text-xs md:text-sm lg:text-base font-medium pl-2.5 md:pl-0">
                 {date.getDate()}
               </span>
               <div className="flex flex-col gap-0.5 md:gap-1 mt-auto pl-2.5 md:pl-0 justify-center h-full">
-  {value && (
-    <>
-      <span className="text-[10px] md:text-xs lg:text-sm font-medium text-green-500">
-        +{value.toLocaleString()}
-      </span>
-      <span className="text-[10px] md:text-xs lg:text-sm font-medium text-red-500">
-        -{value.toLocaleString()}
-      </span>
-    </>
-  )}
-</div>
+                {value && (
+                  <>
+                    <span className="text-[10px] md:text-xs lg:text-sm font-medium text-green-500">
+                      +{value.toLocaleString()}
+                    </span>
+                    <span className="text-[10px] md:text-xs lg:text-sm font-medium text-red-500">
+                      -{value.toLocaleString()}
+                    </span>
+                  </>
+                )}
+              </div>
 
             </button>
           ))}
