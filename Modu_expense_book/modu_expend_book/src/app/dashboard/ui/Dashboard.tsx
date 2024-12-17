@@ -25,28 +25,27 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="w-full h-screen flex flex-col px-0 sm:px-4 py-2 md:container md:mx-auto md:px-6 md:py-4">
-  <Header />
-  {/* 모바일에서는 1열, 데스크탑에서는 3열 그리드 */}
-  <div className="flex-1 grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-3">
-    {/* Calendar - 모바일에서는 전체 너비 */}
-    <div className="md:col-span-2 md:row-span-2 h-full">
-      <Calendar data={expenseData} onDateSelect={handleDateSelect} />
-    </div>
-    
-    {/* 통계 위젯들 - 모바일에서는 세로로 쌓임 */}
-    <div className="flex flex-col gap-3">
-      <div className="h-full">
-        <GoalProgress 
-          dailyGoal={300000}
-          weeklyGoal={200000}
-          monthlyGoal={100000}
-        />
-      </div>
-      <div className="h-full">
-        <MonthlyOverview />
-      </div>
-    </div>
+    <div className="w-full h-screen flex flex-col px-0 md:px-4 py-2 md:container md:mx-auto md:px-6 md:py-4">
+      <Header />
+      <div className="flex-1 grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-3">
+        {/* Calendar - 2열 2행 병합 */}
+        <div className="md:col-span-2 md:row-span-2 h-full">
+          <Calendar data={expenseData} onDateSelect={handleDateSelect} />
+        </div>
+
+        {/* GoalProgress - 3열 1행 */}
+        <div className="h-full">
+          <GoalProgress
+            dailyGoal={300000}
+            weeklyGoal={200000}
+            monthlyGoal={100000}
+          />
+        </div>
+
+        {/* MonthlyOverview - 3열 2행 */}
+        <div className="h-full">
+          <MonthlyOverview />
+        </div>
 
 
       </div>

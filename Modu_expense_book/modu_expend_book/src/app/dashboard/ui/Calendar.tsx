@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { Card, CardContent, CardHeader } from '@/app/dashboard/ui/card';
+import { Card, CardContent, CardHeader } from '@/app/dashboard/ui/Card';
 
 interface CalendarProps {
   data?: Record<string, number>;
@@ -97,15 +97,13 @@ const Calendar = ({ data = {}, onDateSelect }: CalendarProps) => {
   const yearRange = Array.from({ length: 11 }, (_, i) => currentYear - 5 + i);
 
   return (
-    // Calendar.tsx
-    <Card className="w-full min-h-[85.5vh] max-h-[85.5vh] border-none widget sm:px-0">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        {/* 헤더 내용 */}
-        <div className="flex items-center space-x-4">
+    <Card className="w-full h-full border-none bg-white rounded-lg shadow-sm">
+      <CardHeader className="flex flex-row items-center justify-between p-2 md:p-3 lg:p-4">
+        <div className="flex items-center space-x-2 md:space-x-3 lg:space-x-4">
           <select
             value={currentDate.getFullYear()}
             onChange={(e) => setCurrentDate(new Date(parseInt(e.target.value), currentDate.getMonth()))}
-            className="p-2 hover:bg-secondary rounded-full text-secondary-foreground transition-colors"
+            className="p-1 md:p-1.5 lg:p-2 text-xs md:text-sm lg:text-base hover:bg-secondary rounded-full"
             aria-label="연도 선택"
           >
             {yearRange.map(year => (
@@ -115,7 +113,7 @@ const Calendar = ({ data = {}, onDateSelect }: CalendarProps) => {
           <select
             value={currentDate.getMonth()}
             onChange={(e) => setCurrentDate(new Date(currentDate.getFullYear(), parseInt(e.target.value)))}
-            className="p-2 hover:bg-secondary rounded-full text-secondary-foreground transition-colors"
+            className="p-1 md:p-1.5 lg:p-2 text-xs md:text-sm lg:text-base hover:bg-secondary rounded-full"
             aria-label="월 선택"
           >
             {['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'].map((month, i) => (
@@ -126,46 +124,55 @@ const Calendar = ({ data = {}, onDateSelect }: CalendarProps) => {
         <div className="flex items-center space-x-2">
           <button
             onClick={handlePrevMonth}
-            className="p-2 bg-sky-400 hover:bg-sky-500 rounded-full text-white transition-colors"
+            className="p-1 md:p-1.5 lg:p-2 bg-sky-400 hover:bg-sky-500 rounded-full text-white transition-colors"
             aria-label="이전 달"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
           </button>
           <button
             onClick={handleNextMonth}
-            className="p-2 bg-sky-400 hover:bg-sky-500 rounded-full text-white transition-colors"
+            className="p-1 md:p-1.5 lg:p-2 bg-sky-400 hover:bg-sky-500 rounded-full text-white transition-colors"
             aria-label="다음 달"
           >
-            <ChevronRight className="w-5 h-5" />
+            <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
           </button>
         </div>
       </CardHeader>
-      <CardContent className="flex-1">
-        <div className="grid grid-cols-7 gap-1 h-full">
+      <CardContent className="p-0 md:p-2 lg:p-4">
+        <div className="grid grid-cols-7 gap-0 md:gap-0.5 lg:gap-1">
           {weekDays.map((day) => (
-            <div key={day} className="py-2 text-sm font-semibold text-muted-foreground pl-2">
+            <div key={day} className="py-1 md:py-1.5 lg:py-2 text-xs md:text-sm font-semibold text-left pl-2">
               {day}
             </div>
           ))}
+
           {days.map(({ date, isCurrentMonth, value }, index) => (
             <button
               key={index}
               onClick={() => handleDateClick(date, value)}
               className={`
-              p-3 rounded-lg flex flex-col items-start h-[calc(55vh/6)] 
-              ${isCurrentMonth ? 'text-foreground' : 'text-muted-foreground'} 
+              p-1 md:p-2 lg:p-3 
+              flex flex-col items-start 
+              min-h-[45px] md:min-h-[65px] lg:min-h-[85px]
+              ${isCurrentMonth ? 'text-foreground' : 'text-muted-foreground'}
               ${selectedDate && date.toDateString() === selectedDate.toDateString()
                   ? 'bg-[#E6F3FF] border border-[#3b82f6]'
                   : 'hover:bg-[#D6E9FF]'}
-              transition-colors
             `}
             >
-              <div className="flex flex-col items-start">
-                <span className="text-base font-medium">{date.getDate()}</span>
+              <span className="text-xs md:text-sm lg:text-base font-medium">
+                {date.getDate()}
+              </span>
+              <div className="flex flex-col gap-0.5 md:gap-1 mt-0.5 md:mt-1">
                 {value && (
-                  <span className="text-sm font-medium text-[#3b82f6] mt-1">
-                    ${value.toLocaleString()}
-                  </span>
+                  <>
+                    <span className="text-[10px] md:text-xs lg:text-sm font-medium text-green-500">
+                      +{value.toLocaleString()}
+                    </span>
+                    <span className="text-[10px] md:text-xs lg:text-sm font-medium text-red-500">
+                      -{value.toLocaleString()}
+                    </span>
+                  </>
                 )}
               </div>
             </button>
@@ -173,6 +180,8 @@ const Calendar = ({ data = {}, onDateSelect }: CalendarProps) => {
         </div>
       </CardContent>
     </Card>
+
+
 
   );
 };

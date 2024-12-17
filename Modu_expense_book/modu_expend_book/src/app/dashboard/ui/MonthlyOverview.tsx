@@ -95,8 +95,8 @@ export default function MonthlyOverview() {
   }, [])
 
   return (
-    <div className="widget">
-      <div ref={chartRef} className="h-60"></div>
+    <div className="bg-white rounded-lg shadow-sm p-4 h-full">
+      <div ref={chartRef} className="h-full" />
     </div>
   )
 }
