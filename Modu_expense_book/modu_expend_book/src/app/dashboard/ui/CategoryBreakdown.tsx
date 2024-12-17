@@ -3,9 +3,9 @@
 import { useEffect, useRef } from 'react'
 import * as echarts from 'echarts/core'
 import { PieChart } from 'echarts/charts'
-import { 
-  TooltipComponent, 
-  LegendComponent 
+import {
+  TooltipComponent,
+  LegendComponent
 } from 'echarts/components'
 import { CanvasRenderer } from 'echarts/renderers'
 import type { EChartsOption } from 'echarts'
@@ -24,7 +24,7 @@ export default function CategoryBreakdown() {
   useEffect(() => {
     if (chartRef.current) {
       const chart = echarts.init(chartRef.current)
-      
+
       const option: EChartsOption = {
         animation: false,
         tooltip: {
@@ -66,8 +66,8 @@ export default function CategoryBreakdown() {
 
   return (
     <div className="widget">
-      <h3 className="text-xl font-semibold mb-1 text-foreground">카테고리별 지출</h3>
-      <div ref={chartRef} className="h-56"></div>
+      <h3 className="text-xl font-semibold text-foreground">카테고리별 지출</h3>
+      <div ref={chartRef} className="h-44"></div>
     </div>
   )
 }

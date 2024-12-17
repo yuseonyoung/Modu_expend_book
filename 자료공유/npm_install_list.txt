@@ -43,5 +43,5 @@ npm install @fortawesome/react-fontawesome
 npm install react-big-calendar moment
 npm install --save-dev @types/react-big-calendar @types/moment
 npm install echarts @types/echarts
-
+npm install next-themes
 /***********************************************************************************************/
