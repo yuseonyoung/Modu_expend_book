@@ -1,25 +1,22 @@
 'use client'
-
 import { useState } from 'react'
 import Header from '@/components/Header'
 import Calendar from '@/app/dashboard/ui/Calendar'
 import MonthlyOverview from '@/app/dashboard/ui/MonthlyOverview'
-/* import CategoryBreakdown from '@/app/dashboard/ui/CategoryBreakdown'*/
+import CategoryBreakdown from '@/app/dashboard/ui/CategoryBreakdown'
 import AddExpenseButton from '@/app/dashboard/ui/AddExpenseButton'
 import ExpenseListModal from '@/app/dashboard/ui/ExpenseListModal'
 import GoalProgress from '@/app/dashboard/ui/GoalProgress'
 
 export default function Dashboard() {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null) 
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
- 
+  const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 })
   const expenseData: Record<string, number> = {
-    '2024-12-14': 125.50,
-    '2024-12-15': 75.20,
-    '2024-12-16': 50.30,
+    '2024-12-14': 125.5,
+    '2024-12-15': 75.2,
+    '2024-12-16': 50.3,
   }
-
   const handleDateSelect = (date: Date) => {
     setSelectedDate(date)
   }
@@ -27,31 +24,31 @@ export default function Dashboard() {
   return (
     <div className="w-full min-h-screen flex flex-col px-0 md:px-4 py-2 md:container md:mx-auto md:px-6 md:py-4">
       <Header />
-      <div className="flex-1 grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-4 md:gap-3">
-        {/* Calendar - 2열 2행 병합 */}
-        <div className="md:col-span-2 md:row-span-2 h-screen md:h-full">
-          <Calendar data={expenseData} onDateSelect={handleDateSelect} />
-        </div>
-        {/* GoalProgress - 3열 1행 */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {/* GoalProgress - 항상 표시 */}
         <div className="min-h-fit">
-          <GoalProgress
-            dailyGoal={300000}
-            weeklyGoal={200000}
-            monthlyGoal={100000}
-          />
+          <GoalProgress dailyGoal={300000} weeklyGoal={200000} monthlyGoal={100000} />
         </div>
-
-        {/* MonthlyOverview - 3열 2행 */}
-        <div className="min-h-[250px]">
+        
+        {/* MonthlyOverview - 모바일에서 숨김 */}
+        <div className="hidden md:block min-h-[250px]">
           <MonthlyOverview />
         </div>
-
-
+        
+        {/* CategoryBreakdown - 모바일에서 숨김 */}
+        <div className="hidden md:block">
+          <CategoryBreakdown />
+        </div>
+        
+        {/* Calendar - 항상 표시 */}
+        <div className="col-span-1 md:col-span-3 w-full">
+          <Calendar data={expenseData} onDateSelect={handleDateSelect} />
+        </div>
       </div>
       <AddExpenseButton
         onClick={(x, y) => {
-          setModalPosition({ x, y });
-          setIsModalOpen(true);
+          setModalPosition({ x, y })
+          setIsModalOpen(true)
         }}
       />
       <ExpenseListModal
