@@ -12,7 +12,7 @@ export default function Dashboard() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   // const [isModalOpen, setIsModalOpen] = useState(false)
   // const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 })
-  
+   
   const expenseData: Record<string, number> = {
     '2024-12-16': 1125000,
     '2024-12-17': 75200,
@@ -45,7 +45,6 @@ export default function Dashboard() {
         {/* Calendar - 항상 표시 */}
         <div className="col-span-1 md:col-span-3 w-full">
           <Calendar data={expenseData} onDateSelect={handleDateSelect} selectedDate={selectedDate} /> 
- 
         </div>
       </div>
       {/* AddExpenseButton 및 ExpenseListModal은 더 이상 사용되지 않습니다 */}
