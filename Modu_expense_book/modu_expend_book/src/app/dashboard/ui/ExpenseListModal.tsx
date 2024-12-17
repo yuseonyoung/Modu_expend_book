@@ -12,7 +12,7 @@ interface ExpenseListModalProps {
   
   export default function ExpenseListModal({ isOpen, onClose, selectedDate }: ExpenseListModalProps) {
     if (!isOpen) return null;
-  
+   
     return (
       <div 
         className="fixed z-50 animate-modal-open"

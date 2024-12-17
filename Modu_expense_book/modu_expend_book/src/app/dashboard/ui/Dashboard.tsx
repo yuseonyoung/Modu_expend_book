@@ -13,7 +13,7 @@ export default function Dashboard() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
-
+ 
   const expenseData: Record<string, number> = {
     '2024-12-14': 125.50,
     '2024-12-15': 75.20,

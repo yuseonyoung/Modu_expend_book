@@ -9,7 +9,7 @@ interface CalendarProps {
   className?: string;
 }
 
-interface DayInfo {
+interface DayInfo { 
   date: Date;
   isCurrentMonth: boolean;
   value?: number;

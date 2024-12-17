@@ -5,7 +5,7 @@ interface GoalProgressProps {
   weeklyGoal: number;
   monthlyGoal: number;
 }
-
+ 
 export default function GoalProgress({ dailyGoal, weeklyGoal, monthlyGoal }: GoalProgressProps) {
   return (
     <div className="bg-white rounded-lg shadow-sm p-4 h-full flex flex-col">

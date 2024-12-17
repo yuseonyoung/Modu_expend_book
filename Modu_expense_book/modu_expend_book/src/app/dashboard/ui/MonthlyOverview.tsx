@@ -90,7 +90,7 @@ export default function MonthlyOverview() {
       return () => {
         chart.dispose()
         window.removeEventListener('resize', handleResize)
-      }
+      } 
     }
   }, [])
 
