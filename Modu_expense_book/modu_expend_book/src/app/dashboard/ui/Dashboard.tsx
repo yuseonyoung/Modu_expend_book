@@ -4,19 +4,21 @@ import Header from '@/components/Header'
 import Calendar from '@/app/dashboard/ui/Calendar'
 import MonthlyOverview from '@/app/dashboard/ui/MonthlyOverview'
 import CategoryBreakdown from '@/app/dashboard/ui/CategoryBreakdown'
-import AddExpenseButton from '@/app/dashboard/ui/AddExpenseButton'
-import ExpenseListModal from '@/app/dashboard/ui/ExpenseListModal'
+// import AddExpenseButton from '@/app/dashboard/ui/AddExpenseButton'
+// import ExpenseListModal from '@/app/dashboard/ui/ExpenseListModal'
 import GoalProgress from '@/app/dashboard/ui/GoalProgress'
 
 export default function Dashboard() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 })
+  // const [isModalOpen, setIsModalOpen] = useState(false)
+  // const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 })
+  
   const expenseData: Record<string, number> = {
     '2024-12-14': 125.5,
     '2024-12-15': 75.2,
     '2024-12-16': 50.3,
   }
+
   const handleDateSelect = (date: Date) => {
     setSelectedDate(date)
   }
@@ -45,6 +47,8 @@ export default function Dashboard() {
           <Calendar data={expenseData} onDateSelect={handleDateSelect} />
         </div>
       </div>
+      {/* AddExpenseButton 및 ExpenseListModal은 더 이상 사용되지 않습니다 */}
+      {/* 
       <AddExpenseButton
         onClick={(x, y) => {
           setModalPosition({ x, y })
@@ -56,7 +60,8 @@ export default function Dashboard() {
         onClose={() => setIsModalOpen(false)}
         selectedDate={selectedDate}
         position={modalPosition}
-      />
+      /> 
+      */}
     </div>
   )
 }

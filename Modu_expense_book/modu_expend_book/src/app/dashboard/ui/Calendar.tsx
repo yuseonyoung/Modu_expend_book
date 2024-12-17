@@ -175,10 +175,8 @@ const Calendar = ({ data = {}, onDateSelect }: CalendarProps) => {
                   </>
                 )}
               </div>
-
             </button>
           ))}
-
         </div>
       </CardContent>
     </Card>
