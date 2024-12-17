@@ -10,7 +10,7 @@ import ExpenseListModal from '@/app/dashboard/ui/ExpenseListModal'
 import GoalProgress from '@/app/dashboard/ui/GoalProgress'
 
 export default function Dashboard() {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null)
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null) 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
  
@@ -29,10 +29,9 @@ export default function Dashboard() {
       <Header />
       <div className="flex-1 grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-4 md:gap-3">
         {/* Calendar - 2열 2행 병합 */}
-        <div className="md:col-span-2 md:row-span-2 min-h-[450px] md:min-h-0">
+        <div className="md:col-span-2 md:row-span-2 h-screen md:h-full">
           <Calendar data={expenseData} onDateSelect={handleDateSelect} />
         </div>
-
         {/* GoalProgress - 3열 1행 */}
         <div className="min-h-fit">
           <GoalProgress

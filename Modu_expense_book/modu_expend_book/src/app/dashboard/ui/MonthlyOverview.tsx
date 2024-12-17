@@ -49,7 +49,7 @@ export default function MonthlyOverview() {
           bottom: '3%',
           containLabel: true
         },
-        xAxis: {
+        xAxis: { 
           type: 'category',
           data: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
           axisLabel: { color: '#000' },

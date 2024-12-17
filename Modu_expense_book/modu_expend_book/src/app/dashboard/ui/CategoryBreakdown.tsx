@@ -11,7 +11,7 @@ import { CanvasRenderer } from 'echarts/renderers'
 import type { EChartsOption } from 'echarts' 
 
 // 필요한 컴포넌트 등록
-echarts.use([
+echarts.use([ 
   PieChart,
   TooltipComponent,
   LegendComponent,

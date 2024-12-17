@@ -11,7 +11,7 @@ export default function GoalProgress({ dailyGoal, weeklyGoal, monthlyGoal }: Goa
     <div className="bg-white rounded-lg shadow-sm p-4 h-full flex flex-col">
       <h2 className="text-lg font-bold text-black text-center mb-6">목표 달성률</h2>
       <div className="flex-1 flex flex-col justify-center space-y-6">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center"> 
           <span className="text-sm font-bold text-gray-600">주별 목표 금액</span>
           <span className="font-bold text-black">₩{dailyGoal.toLocaleString()}</span>
         </div>

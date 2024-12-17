@@ -12,7 +12,7 @@ export default function AddExpenseButton({ onClick }: AddExpenseButtonProps) {
     onClick(rect.left, rect.top);
   }
 
-  return (
+  return ( 
     <button 
       className="fixed bottom-8 right-8 bg-primary hover:bg-primary/90 text-primary-foreground p-4 rounded-full shadow-lg"
       onClick={handleClick}

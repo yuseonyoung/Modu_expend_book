@@ -16,7 +16,7 @@ interface Expense {
   icon: IconDefinition;
 }
 
-export default function ExpenseList({ selectedDate }: ExpenseListProps) {
+export default function ExpenseList({ selectedDate }: ExpenseListProps) { 
   if (!selectedDate) return null;
 
   // 샘플 지출 데이터

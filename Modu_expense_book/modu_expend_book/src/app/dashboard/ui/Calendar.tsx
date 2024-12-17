@@ -151,30 +151,31 @@ const Calendar = ({ data = {}, onDateSelect }: CalendarProps) => {
               key={index}
               onClick={() => handleDateClick(date, value)}
               className={`
-                p-1 md:p-2 lg:p-3 
-                flex flex-col items-start 
-                h-[80px] md:h-full // 모바일에서는 고정 높이, 데스크탑에서는 비율 유지
+                flex flex-col items-start justify-start
+                h-[80px] sm:h-[80px] lg:h-[90px] md:h-full
+                
                 ${isCurrentMonth ? 'text-foreground' : 'text-muted-foreground'}
                 ${selectedDate && date.toDateString() === selectedDate.toDateString()
                             ? 'bg-[#E6F3FF] border border-[#3b82f6]'
                             : 'hover:bg-[#D6E9FF]'}
               `}
             >
-              <span className="text-xs md:text-sm pl-1 lg:text-base font-medium">
+              <span className="text-xs md:text-sm lg:text-base font-medium pl-2.5 md:pl-0">
                 {date.getDate()}
               </span>
-              <div className="flex flex-col gap-0.5 md:gap-1 mt-0.5 md:mt-1 pl-1">  
-                {value && (
-                  <>
-                    <span className="text-[10px] md:text-xs lg:text-sm font-medium text-green-500">
-                      +{value.toLocaleString()}
-                    </span>
-                    <span className="text-[10px] md:text-xs lg:text-sm font-medium text-red-500">
-                      -{value.toLocaleString()}
-                    </span>
-                  </>
-                )}
-              </div>
+              <div className="flex flex-col gap-0.5 md:gap-1 mt-auto pl-2.5 md:pl-0 justify-center h-full">
+  {value && (
+    <>
+      <span className="text-[10px] md:text-xs lg:text-sm font-medium text-green-500">
+        +{value.toLocaleString()}
+      </span>
+      <span className="text-[10px] md:text-xs lg:text-sm font-medium text-red-500">
+        -{value.toLocaleString()}
+      </span>
+    </>
+  )}
+</div>
+
             </button>
           ))}
 

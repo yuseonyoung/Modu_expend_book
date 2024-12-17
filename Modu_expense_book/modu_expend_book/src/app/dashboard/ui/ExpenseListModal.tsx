@@ -14,7 +14,7 @@ interface ExpenseListModalProps {
     if (!isOpen) return null;
    
     return (
-      <div 
+      <div  
         className="fixed z-50 animate-modal-open"
         style={{
           right: '1rem',  // 화면 오른쪽 끝에서 1rem 간격
