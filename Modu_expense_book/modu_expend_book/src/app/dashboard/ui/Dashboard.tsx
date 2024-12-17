@@ -29,7 +29,7 @@ export default function Dashboard() {
       <Header />
       <div className="flex-1 grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-4 md:gap-3">
         {/* Calendar - 2열 2행 병합 */}
-        <div className="md:col-span-2 md:row-span-2">
+        <div className="md:col-span-2 md:row-span-2 min-h-[450px] md:min-h-0">
           <Calendar data={expenseData} onDateSelect={handleDateSelect} />
         </div>
 
@@ -43,7 +43,7 @@ export default function Dashboard() {
         </div>
 
         {/* MonthlyOverview - 3열 2행 */}
-        <div className="min-h-[200px]">
+        <div className="min-h-[250px]">
           <MonthlyOverview />
         </div>
 
