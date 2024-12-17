@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader } from '@/app/dashboard/ui/Card';
 interface CalendarProps {
   data?: Record<string, number>;
   onDateSelect?: (date: Date, value?: number) => void;
+  selectedDate?: Date | null;
   className?: string;
 }
 
@@ -24,7 +25,8 @@ const Calendar = ({ data = {}, onDateSelect }: CalendarProps) => {
       const todayKey = formatDateKey(selectedDate);
       onDateSelect?.(selectedDate, data[todayKey]);
     }
-  }, []);
+  }, [selectedDate]);
+  
 
 
   const formatDateKey = (date: Date): string => {
