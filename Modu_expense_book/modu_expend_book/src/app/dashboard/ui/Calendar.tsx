@@ -19,14 +19,14 @@ interface DayInfo {
 const Calendar = ({ data = {}, onDateSelect }: CalendarProps) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
- 
+
   useEffect(() => {
     if (selectedDate) {
       const todayKey = formatDateKey(selectedDate);
       onDateSelect?.(selectedDate, data[todayKey]);
     }
   }, [selectedDate]);
-  
+
 
 
   const formatDateKey = (date: Date): string => {
@@ -92,6 +92,7 @@ const Calendar = ({ data = {}, onDateSelect }: CalendarProps) => {
   }; */
 
   const handleDateClick = (date: Date, value?: number) => {
+    console.log("Clicked Date:", date);
     setSelectedDate(date);
     onDateSelect?.(date, value);
   };
@@ -157,30 +158,38 @@ const Calendar = ({ data = {}, onDateSelect }: CalendarProps) => {
                 h-[90px] sm:h-[90px] lg:h-[90px] md:h-full
                 ${isCurrentMonth ? 'text-foreground' : 'text-muted-foreground'}
                 ${selectedDate && date.toDateString() === selectedDate.toDateString()
-                  ? 'bg-[#E6F3FF] border border-[#3b82f6]'
-                  : 'hover:bg-[#D6E9FF]'}
-                max-w-[150px]
-                overflow-hidden
+                            ? 'bg-[#E6F3FF] border border-[#3b82f6]'
+                            : 'hover:bg-[#D6E9FF]'}
+                max-w-[150px] overflow-hidden
               `}
+              style={{
+                color: !isCurrentMonth
+                  ? '' // 다음/이전 달은 색상 유지
+                  : date.getDay() === 0
+                    ? 'red' // 일요일 빨간색
+                    : date.getDay() === 6
+                      ? 'blue' // 토요일 파란색
+                      : '', // 평일 색상 기본
+              }}
             >
-            <span className="text-xs md:text-sm lg:text-base font-medium pl-2.5 md:pl-0">
-              {date.getDate()}
-            </span>
-            <div className="flex flex-col gap-0.5 md:gap-1 mt-auto pl-2.5 md:pl-0 justify-center h-full">
-              {value && (
-                <>
-                  <span className="text-[8.5px] md:text-xs lg:text-sm font-medium text-green-500 overflow-hidden whitespace-nowrap text-ellipsis">
-                    +{value.toLocaleString()}
-                  </span>
-                  <span className="text-[8.5px] md:text-xs lg:text-sm font-medium text-red-500 overflow-hidden whitespace-nowrap text-ellipsis">
-                    -{value.toLocaleString()}
-                  </span>
-                </>
-              )}
-            </div>
-          </button>
-          
+              <span className="text-xs md:text-sm lg:text-base font-medium pl-2.5 md:pl-0">
+                {date.getDate()}
+              </span>
+              <div className="flex flex-col gap-0.5 md:gap-1 mt-auto pl-2.5 md:pl-0 justify-center h-full">
+                {value && (
+                  <>
+                    <span className="text-[8.5px] md:text-xs lg:text-sm font-medium text-green-500 overflow-hidden whitespace-nowrap text-ellipsis">
+                      +{value.toLocaleString()}
+                    </span>
+                    <span className="text-[8.5px] md:text-xs lg:text-sm font-medium text-red-500 overflow-hidden whitespace-nowrap text-ellipsis">
+                      -{value.toLocaleString()}
+                    </span>
+                  </>
+                )}
+              </div>
+            </button>
           ))}
+
         </div>
       </CardContent>
     </Card>

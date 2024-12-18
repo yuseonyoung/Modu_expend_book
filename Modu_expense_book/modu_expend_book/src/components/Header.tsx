@@ -1,108 +1,95 @@
 'use client'
-
 import Image from 'next/image'
 import { useState } from 'react'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Home, BarChart, User } from 'lucide-react'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
-    <header className="relative flex justify-between items-center mb-2 px-2 py-1 w-full">
-      <div className="flex items-center gap-1">
+    <header className="relative flex justify-between items-center px-6 py-4 w-full bg-white shadow-md">
+      {/* 로고 & 제목 */}
+      <div className="flex items-center gap-3">
         <Image
           src="/icon/logo.png"
           alt="Logo"
-          width={24}
-          height={24}
-          className="h-6 w-6"
+          width={40}
+          height={40}
+          className="h-10 w-10"
         />
-        <h1 className="text-lg sm:text-2xl font-bold text-black">모두의 가계부</h1>
+        <h1 className="text-2xl font-bold text-gray-900">모두의 가계부</h1>
       </div>
 
-      {/* 데스크탑/태블릿 네비게이션 */}
-      <nav className="hidden md:flex gap-4">
-        <a href="#" className="text-black text-lg font-bold hover:text-gray-300">Home</a>
-        <a href="#" className="text-black text-lg font-bold hover:text-gray-300">보고서</a>
-        <a href="#" className="text-black text-lg font-bold hover:text-gray-300">마이페이지</a>
+      {/* 데스크탑 메뉴 */}
+      <nav className="hidden md:flex items-center gap-6">
+        <a href="#" className="text-gray-700 text-lg font-medium hover:text-blue-500 transition duration-300">
+          Home
+        </a>
+        <a href="#" className="text-gray-700 text-lg font-medium hover:text-blue-500 transition duration-300">
+          보고서
+        </a>
+        <a href="#" className="text-gray-700 text-lg font-medium hover:text-blue-500 transition duration-300">
+          마이페이지
+        </a>
       </nav>
 
       {/* 모바일 메뉴 버튼 */}
       <button
-        className="md:hidden p-2"
+        className="md:hidden p-2 rounded-md text-gray-700 hover:bg-gray-100 transition duration-300"
         onClick={() => setIsMenuOpen(true)}
       >
-        <Menu className="h-6 w-6 text-black" />
+        <Menu className="h-6 w-6" />
       </button>
 
+      {/* 모바일 메뉴 */}
       {isMenuOpen && (
-        <div className="fixed inset-0 bg-white z-50 overflow-y-auto">
-          <div className="flex flex-col h-full">
-            <div className="p-4 border-b">
-              <div className="flex justify-between items-start">
-                <div className="flex items-center gap-3">
-                  <Image
-                    src="/icon/profile.png"
-                    alt="Profile"
-                    width={48}
-                    height={48}
-                    className="rounded-full"
-                  />
-                  <span className="text-xl text-black">유선영</span>
-                </div>
-                <button onClick={() => setIsMenuOpen(false)} className="p-2">
-                  <X className="h-6 w-6 text-black" />
-                </button>
+        <div className="fixed inset-0 z-50 bg-white flex flex-col animate-slide-in-left">
+          {/* 프로필 섹션 */}
+          <div className="flex items-center justify-between p-4 border-b">
+            <div className="flex items-center gap-3">
+              <div className="w-20 h-20 overflow-hidden rounded-full">
+                <Image
+                  src="/icon/profile_sample.jpg"
+                  alt="Profile"
+                  width={60}
+                  height={60}
+                  className="object-cover w-full h-full"
+                />
               </div>
-              <div className="flex gap-2 mt-3">
-                <nav className="flex gap-2">
-                  <a href="#" className="text-black text-lg font-bold hover:text-gray-300">Home</a>
-                  <a href="#" className="text-black text-lg font-bold hover:text-gray-300">보고서</a>
-                  <a href="#" className="text-black text-lg font-bold hover:text-gray-300">마이페이지</a>
-                </nav>
-
-              </div>
+              <span className="text-xl font-semibold text-gray-800">덤블도어</span>
             </div>
 
-            <div className="flex flex-col p-4">
-              <a href="#" className="py-3 text-lg text-black flex items-center">
-                <span className="w-4 h-4 mr-2">□</span>캠퍼스소개
-              </a>
-              <a href="#" className="py-3 text-lg text-black flex items-center">
-                <span className="w-4 h-4 mr-2">□</span>공지사항
-              </a>
-              <a href="#" className="py-3 text-lg text-black flex items-center">
-                <span className="w-4 h-4 mr-2">□</span>다운로드보관함
-              </a>
-              <a href="#" className="py-3 text-lg text-black flex items-center">
-                <span className="w-4 h-4 mr-2">□</span>다운로드설정
-              </a>
-              <a href="#" className="py-3 text-lg text-black flex items-center">
-                <span className="w-4 h-4 mr-2">□</span>학사정보
-              </a>
-            </div>
+            <button
+              onClick={() => setIsMenuOpen(false)}
+              className="p-2 rounded-md hover:bg-gray-200 transition duration-300"
+            >
+              <X className="h-6 w-6 text-gray-700" />
+            </button>
+          </div>
 
-            <div className="mt-auto p-4 bg-gray-50">
-              <div className="flex flex-col space-y-4">
-                <a href="#" className="text-sm text-black">· 웹 브라우저에서 열기</a>
-                <a href="#" className="text-sm text-black">· 자주묻는질문</a>
-                <a href="#" className="text-sm text-black">· 문의안내</a>
-                <a href="#" className="text-sm text-black">· 이용약관</a>
-                <a href="#" className="text-sm text-black">· 개인정보취급방침</a>
-                <a href="#" className="text-sm text-black">· English</a>
-                <div className="flex items-center">
-                  <span className="text-sm text-black">· 방송대학TV</span>
-                  <span className="ml-2 px-2 py-0.5 text-xs text-white bg-red-600 rounded">ON-AIR</span>
-                </div>
-              </div>
-
-              <div className="mt-6 flex items-center justify-between border-t pt-4">
-                <span className="text-sm text-black">푸시알림</span>
-                <div className="w-12 h-6 bg-gray-200 rounded-full relative">
-                  <div className="w-5 h-5 bg-white rounded-full absolute right-1 top-0.5"></div>
-                </div>
-              </div>
-            </div>
+          {/* 모바일 메뉴 링크 */}
+          <div className="flex flex-col p-6 space-y-5">
+            <a
+              href="#"
+              className="flex items-center text-lg font-medium text-gray-700 hover:text-blue-500 transition duration-300"
+            >
+              <Home className="h-5 w-5 mr-3 text-blue-400" />
+              Home
+            </a>
+            <a
+              href="#"
+              className="flex items-center text-lg font-medium text-gray-700 hover:text-blue-500 transition duration-300"
+            >
+              <BarChart className="h-5 w-5 mr-3 text-blue-400" />
+              보고서
+            </a>
+            <a
+              href="#"
+              className="flex items-center text-lg font-medium text-gray-700 hover:text-blue-500 transition duration-300"
+            >
+              <User className="h-5 w-5 mr-3 text-blue-400" />
+              마이페이지
+            </a>
           </div>
         </div>
       )}

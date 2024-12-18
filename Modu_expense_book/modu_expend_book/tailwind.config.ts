@@ -13,6 +13,15 @@ module.exports = {
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		},
+		animation: {
+			'slide-in-left': 'slide-in-left 0.3s ease-out',
+		},
+		keyframes: {
+			'slide-in-left': {
+				'0%': { transform: 'translateX(-100%)', opacity: '0' },
+				'100%': { transform: 'translateX(0)', opacity: '1' },
+			},
+		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
