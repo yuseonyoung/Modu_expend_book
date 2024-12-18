@@ -18,7 +18,7 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="space-y-6 h-full">
+    <div className={`space-y-6 ${isMobile ? 'pb-24' : ''}`}>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         <BudgetOverview isMobile={isMobile} />
         <div className="hidden md:block">
@@ -28,7 +28,7 @@ export default function Home() {
           <CategoryChart />
         </div>
       </div>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3 flex-1 h-[calc(100vh-400px)]">
+      <div className={`grid grid-cols-1 gap-4 md:grid-cols-3 flex-1 ${isMobile ? 'mb-16' : 'h-[calc(100vh-400px)]'}`}>
         <div className="md:col-span-2 h-full">
           <Calendar isMobile={isMobile} />
         </div>
