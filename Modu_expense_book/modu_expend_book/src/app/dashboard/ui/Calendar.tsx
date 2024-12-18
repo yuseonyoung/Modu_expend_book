@@ -1,199 +1,216 @@
-'use client'
 import { useState, useEffect } from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { Card, CardContent, CardHeader } from '@/app/dashboard/ui/Card';
+import {
+    startOfMonth,
+    endOfMonth,
+    startOfWeek,
+    endOfWeek,
+    eachDayOfInterval,
+    format,
+    isSameMonth,
+    isSunday,
+    isSaturday,
+    isToday
+} from 'date-fns'
 
 interface CalendarProps {
-  data?: Record<string, number>;
-  onDateSelect?: (date: Date, value?: number) => void;
-  selectedDate?: Date | null;
-  className?: string;
+    isMobile: boolean;
 }
 
-interface DayInfo {
-  date: Date;
-  isCurrentMonth: boolean;
-  value?: number;
-}
+export default function Calendar({ isMobile }: CalendarProps) {
+    const today = new Date()
+    const currentYear = today.getFullYear()
+    const years = Array.from(
+        { length: 11 },
+        (_, i) => currentYear - 5 + i
+    )
 
-const Calendar = ({ data = {}, onDateSelect }: CalendarProps) => {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
-  const [currentDate, setCurrentDate] = useState<Date>(new Date());
+    const [year, setYear] = useState(today.getFullYear())
+    const [month, setMonth] = useState(today.getMonth() + 1)
+    const [currentDate, setCurrentDate] = useState(today)
 
-  useEffect(() => {
-    if (selectedDate) {
-      const todayKey = formatDateKey(selectedDate);
-      onDateSelect?.(selectedDate, data[todayKey]);
-    }
-  }, [selectedDate]);
+    useEffect(() => {
+        setCurrentDate(new Date(year, month - 1))
+    }, [year, month])
 
+    const monthStart = startOfMonth(currentDate)
+    const monthEnd = endOfMonth(monthStart)
+    const calendarStart = startOfWeek(monthStart)
+    const calendarEnd = endOfWeek(monthEnd)
 
+    const days = eachDayOfInterval({ start: calendarStart, end: calendarEnd })
 
-  const formatDateKey = (date: Date): string => {
-    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
-  };
-
-  const getDaysInMonth = (date: Date): DayInfo[] => {
-    const year = date.getFullYear();
-    const month = date.getMonth();
-    const firstDay = new Date(year, month, 1);
-    const lastDay = new Date(year, month + 1, 0);
-    const days: DayInfo[] = [];
-
-    // 이전 달의 날짜들을 추가
-    for (let i = 0; i < firstDay.getDay(); i++) {
-      const prevDate = new Date(year, month, -i);
-      days.unshift({
-        date: prevDate,
-        isCurrentMonth: false,
-        value: data[formatDateKey(prevDate)]
-      });
+    const handleMonthChange = (direction: 'prev' | 'next') => {
+        const newDate = new Date(currentDate)
+        if (direction === 'prev') {
+            newDate.setMonth(newDate.getMonth() - 1)
+        } else {
+            newDate.setMonth(newDate.getMonth() + 1)
+        }
+        setYear(newDate.getFullYear())
+        setMonth(newDate.getMonth() + 1)
+        setCurrentDate(newDate)
     }
 
-    // 현재 달의 날짜들을 추가
-    for (let i = 1; i <= lastDay.getDate(); i++) {
-      const currentDate = new Date(year, month, i);
-      days.push({
-        date: currentDate,
-        isCurrentMonth: true,
-        value: data[formatDateKey(currentDate)]
-      });
+    const getDayClass = (day: Date) => {
+        const classes = ['relative']
+        const isCurrentMonthDay = isSameMonth(day, currentDate)
+
+        if (!isCurrentMonthDay) {
+            classes.push('text-gray-400')
+        } else {
+            if (isSunday(day)) classes.push('text-red-500')
+            if (isSaturday(day)) classes.push('text-blue-500')
+        }
+
+        return classes.join(' ')
     }
 
-    // 다음 달의 날짜들을 추가 (마지막 주를 채우기 위해)
-    const remainingDays = 7 - (days.length % 7);
-    if (remainingDays < 7) {
-      for (let i = 1; i <= remainingDays; i++) {
-        const nextDate = new Date(year, month + 1, i);
-        days.push({
-          date: nextDate,
-          isCurrentMonth: false,
-          value: data[formatDateKey(nextDate)]
-        });
-      }
+    if (isMobile) {
+        return (
+            <section className="bg-white mt-4 px-4 py-4 rounded-lg shadow-sm">
+                <div className="flex items-center gap-4 mb-4">
+                    <select
+                        className="border-none bg-transparent text-sm"
+                        value={year}
+                        onChange={(e) => setYear(Number(e.target.value))}
+                    >
+                        {years.map(y => (
+                            <option key={y} value={y}>{y}년</option>
+                        ))}
+                    </select>
+                    <select
+                        className="border-none bg-transparent text-sm"
+                        value={month}
+                        onChange={(e) => setMonth(Number(e.target.value))}
+                    >
+                        {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => (
+                            <option key={m} value={m}>{m}월</option>
+                        ))}
+                    </select>
+                    <div className="flex gap-4 ml-auto">
+                        <button onClick={() => handleMonthChange('prev')} className="text-gray-400">
+                            <i className="fas fa-chevron-left"></i>
+                        </button>
+                        <button onClick={() => handleMonthChange('next')} className="text-gray-400">
+                            <i className="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+                <div className="grid grid-cols-7 text-center mb-4">
+                    <div className="text-red-500 text-sm">일</div>
+                    <div className="text-sm">월</div>
+                    <div className="text-sm">화</div>
+                    <div className="text-sm">수</div>
+                    <div className="text-sm">목</div>
+                    <div className="text-sm">금</div>
+                    <div className="text-blue-500 text-sm">토</div>
+                </div>
+                <div className="grid grid-cols-7 text-center gap-4">
+                    {days.map((day, index) => (
+                        <div key={index} className="relative flex items-center justify-center h-8">
+                        {isToday(day) && (
+                          <span className="absolute inset-0 flex items-center justify-center">
+                            <span className="w-8 h-8 rounded-full bg-red-100"></span>
+                          </span>
+                        )}
+                        <span className="relative z-10">{format(day, 'd')}</span>
+                        {format(day, 'd') === '20' && (
+                          <div className="text-xs text-red-500 absolute -bottom-4 w-full text-center">-44,500</div>
+                        )}
+                      </div>
+                    ))}
+                </div>
+                <div className="text-center mt-4">
+                    <button className="text-sm text-gray-500 hover:text-gray-700 flex items-center justify-center w-full">
+                        <span>펼쳐보기</span>
+                        <i className="fas fa-chevron-down ml-1"></i>
+                    </button>
+                </div>
+            </section>
+        )
     }
 
-    return days;
-  };
-
-  const days = getDaysInMonth(currentDate);
-  const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-  const handlePrevMonth = () => {
-    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1));
-  };
-
-  const handleNextMonth = () => {
-    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1));
-  };
-
-  /* const formatDate = (date: Date): string => {
-    return `${date.getFullYear()} ${date.toLocaleString('default', { month: 'long' })}`;
-  }; */
-
-  const handleDateClick = (date: Date, value?: number) => {
-    console.log("Clicked Date:", date);
-    setSelectedDate(date);
-    onDateSelect?.(date, value);
-  };
-  const currentYear = new Date().getFullYear();
-  const yearRange = Array.from({ length: 11 }, (_, i) => currentYear - 5 + i);
-
-  return (
-    <Card className="w-full h-full border-none bg-white rounded-lg shadow-sm">
-      <CardHeader className="flex flex-row items-center justify-between p-2 md:p-3 lg:p-4">
-        <div className="flex items-center space-x-2 md:space-x-3 lg:space-x-4">
-          <select
-            value={currentDate.getFullYear()}
-            onChange={(e) => setCurrentDate(new Date(parseInt(e.target.value), currentDate.getMonth()))}
-            className="p-1 md:p-1.5 lg:p-2 text-xs md:text-sm lg:text-base hover:bg-secondary rounded-full"
-            aria-label="연도 선택"
-          >
-            {yearRange.map(year => (
-              <option key={year} value={year}>{year}년</option>
-            ))}
-          </select>
-          <select
-            value={currentDate.getMonth()}
-            onChange={(e) => setCurrentDate(new Date(currentDate.getFullYear(), parseInt(e.target.value)))}
-            className="p-1 md:p-1.5 lg:p-2 text-xs md:text-sm lg:text-base hover:bg-secondary rounded-full"
-            aria-label="월 선택"
-          >
-            {['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'].map((month, i) => (
-              <option key={i} value={i}>{month}</option>
-            ))}
-          </select>
-        </div>
-        <div className="flex items-center space-x-2">
-          <button
-            onClick={handlePrevMonth}
-            className="p-1 md:p-1.5 lg:p-2 bg-sky-400 hover:bg-sky-500 rounded-full text-white transition-colors"
-            aria-label="이전 달"
-          >
-            <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
-          </button>
-          <button
-            onClick={handleNextMonth}
-            className="p-1 md:p-1.5 lg:p-2 bg-sky-400 hover:bg-sky-500 rounded-full text-white transition-colors"
-            aria-label="다음 달"
-          >
-            <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
-          </button>
-        </div>
-      </CardHeader>
-      <CardContent className="p-0 md:p-2 lg:p-4">
-        <div className="grid grid-cols-7 gap-0 md:gap-0.5 lg:gap-1">
-          {weekDays.map((day) => (
-            <div key={day} className="py-1 md:py-1.5 lg:py-2 text-xs md:text-sm font-semibold text-left pl-2">
-              {day}
+    return (
+        <div className="col-span-2 bg-white p-6 rounded-lg shadow h-full">
+            <div className="flex justify-between items-center mb-6">
+                <div className="flex space-x-2">
+                    <select
+                        className="border rounded-lg px-3 py-1"
+                        value={year}
+                        onChange={(e) => setYear(Number(e.target.value))}
+                    >
+                        {years.map(y => (
+                            <option key={y} value={y}>{y}년</option>
+                        ))}
+                    </select>
+                    <select
+                        className="border rounded-lg px-3 py-1"
+                        value={month}
+                        onChange={(e) => setMonth(Number(e.target.value))}
+                    >
+                        {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => (
+                            <option key={m} value={m}>{m}월</option>
+                        ))}
+                    </select>
+                </div>
+                <div className="flex space-x-2">
+                    <button
+                        onClick={() => handleMonthChange('prev')}
+                        className="p-2 hover:bg-gray-100 rounded-lg text-gray-400"
+                    >
+                        <i className="fas fa-chevron-left"></i>
+                    </button>
+                    <button
+                        onClick={() => handleMonthChange('next')}
+                        className="p-2 hover:bg-gray-100 rounded-lg text-gray-400"
+                    >
+                        <i className="fas fa-chevron-right"></i>
+                    </button>
+                </div>
             </div>
-          ))}
 
-          {days.map(({ date, isCurrentMonth, value }, index) => (
-            <button
-              key={index}
-              onClick={() => handleDateClick(date, value)}
-              className={`
-                flex flex-col items-start justify-start
-                h-[90px] sm:h-[90px] lg:h-[90px] md:h-full
-                ${isCurrentMonth ? 'text-foreground' : 'text-muted-foreground'}
-                ${selectedDate && date.toDateString() === selectedDate.toDateString()
-                            ? 'bg-[#E6F3FF] border border-[#3b82f6]'
-                            : 'hover:bg-[#D6E9FF]'}
-                max-w-[150px] overflow-hidden
-              `}
-              style={{
-                color: !isCurrentMonth
-                  ? '' // 다음/이전 달은 색상 유지
-                  : date.getDay() === 0
-                    ? 'red' // 일요일 빨간색
-                    : date.getDay() === 6
-                      ? 'blue' // 토요일 파란색
-                      : '', // 평일 색상 기본
-              }}
-            >
-              <span className="text-xs md:text-sm lg:text-base font-medium pl-2.5 md:pl-0">
-                {date.getDate()}
-              </span>
-              <div className="flex flex-col gap-0.5 md:gap-1 mt-auto pl-2.5 md:pl-0 justify-center h-full">
-                {value && (
-                  <>
-                    <span className="text-[8.5px] md:text-xs lg:text-sm font-medium text-green-500 overflow-hidden whitespace-nowrap text-ellipsis">
-                      +{value.toLocaleString()}
-                    </span>
-                    <span className="text-[8.5px] md:text-xs lg:text-sm font-medium text-red-500 overflow-hidden whitespace-nowrap text-ellipsis">
-                      -{value.toLocaleString()}
-                    </span>
-                  </>
-                )}
-              </div>
-            </button>
-          ))}
+            <div className="grid grid-cols-7 gap-1">
+                <div className="text-center">
+                    <div className="text-red-500 font-medium mb-4">일</div>
+                    <div className="space-y-8">
+                        {days.filter((_, i) => i % 7 === 0).map((day, index) => (
+                            <div key={index} className={getDayClass(day)}>
+                                {isToday(day) && (
+                                    <div className="absolute inset-0 rounded-full bg-sky-100 bg-opacity-50 -z-10" />
+                                )}
+                                {format(day, 'd')}
+                                {format(day, 'd') === '20' && (
+                                    <div className="text-xs text-red-500">-44,500</div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                {['월', '화', '수', '목', '금', '토'].map((dayName, dayIndex) => (
+                    <div key={dayName} className="text-center">
+                        <div className={`font-medium mb-4 ${dayIndex === 5 ? 'text-blue-500' : ''}`}>
+                            {dayName}
+                        </div>
+                        <div className="space-y-8">
+                            {days.filter((_, i) => i % 7 === dayIndex + 1).map((day, index) => (
+                                // 날짜 렌더링 부분 수정
+                                <div key={index} className={getDayClass(day)}>
+                                    {isToday(day) && (
+                                        <span className="absolute inset-0 flex items-center justify-center">
+                                            <span className="w-8 h-8 rounded-full bg-red-100 absolute"></span>
+                                        </span>
+                                    )}
+                                    <span className="relative z-10">{format(day, 'd')}</span>
+                                    {format(day, 'd') === '20' && (
+                                        <div className="text-xs text-red-500 relative z-10">-44,500</div>
+                                    )}
+                                </div>
 
+                            ))}
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
-      </CardContent>
-    </Card>
-  );
-};
-
-export default Calendar;
+    )
+}

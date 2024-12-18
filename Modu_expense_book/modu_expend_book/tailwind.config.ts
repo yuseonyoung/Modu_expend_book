@@ -16,6 +16,11 @@ module.exports = {
 		animation: {
 			'slide-in-left': 'slide-in-left 0.3s ease-out',
 		},
+		screens: {
+			'mobile': {'max': '640px'},
+			'tablet': {'min': '641px', 'max': '1024px'},
+			'desktop': {'min': '1025px'},
+		},
 		keyframes: {
 			'slide-in-left': {
 				'0%': { transform: 'translateX(-100%)', opacity: '0' },

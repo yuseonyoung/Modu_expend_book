@@ -1,27 +1,17 @@
-import type { Metadata, Viewport } from "next";
-import { Inter } from 'next/font/google'
-import './globals.css'
-import { Providers } from './providers'
+import type { Metadata } from 'next'
+import { Noto_Sans_KR } from 'next/font/google'
+import '@/app/globals.css'
+import LayoutClient from '@/app/layoutClient'
+
+const notoSansKR = Noto_Sans_KR({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: "모두의 가계부",
-  description: "절약해보자",
-  manifest: "/manifest.json",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "default",
-    title: "모두의 가계부"
-  },
-};
-
-const inter = Inter({ 
-  subsets: ['latin'],  // 한국어 subset을 원한다면 ['korean']
-  display: 'swap',     // 폰트 로딩 성능 개선
-  variable: '--font-inter' // Tailwind CSS 통합에 유용
-})
-export const viewport: Viewport = {
-  themeColor: "#FFFFFF",
-};
+  title: '예산 관리',
+  description: '개인 예산 관리 대시보드',
+  manifest: '/manifest.json',
+  themeColor: '#ffffff',
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
+}
 
 export default function RootLayout({
   children,
@@ -29,15 +19,17 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ko" suppressHydrationWarning>
-      <body className={`${inter.className} bg-background min-h-screen max-w-screen overflow-x-hidden`}>
-        <Providers>
-          <div className="w-full max-w-full mx-auto">
-            {children}
-          </div>
-        </Providers>
+    <html lang="ko">
+      <head>
+        <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          rel="stylesheet"
+        />
+        <link rel="apple-touch-icon" href="/icon-192x192.png" />
+      </head>
+      <body className={notoSansKR.className}>
+        <LayoutClient>{children}</LayoutClient>
       </body>
     </html>
-  );
+  )
 }
-
