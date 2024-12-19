@@ -45,4 +45,6 @@ npm install --save-dev @types/react-big-calendar @types/moment
 npm install echarts @types/echarts
 npm install next-themes
 npm install lucide-react
+npm install date-fns
 /***********************************************************************************************/
+
