@@ -141,7 +141,8 @@ export default function SignupForm() {
     if (!Object.values(newErrors).some(error => error !== '')) {
       console.log(formData)
       // 제출 로직
-    }
+      router.push('/signup/complete')
+    } 
   }
 
   const years = Array.from({ length: 100 }, (_, i) => new Date().getFullYear() - i)
