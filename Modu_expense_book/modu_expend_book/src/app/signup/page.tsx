@@ -38,8 +38,8 @@ export default function SignupAgreement() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      <div className="max-w-[375px] mx-auto px-5 pb-24">
+    <div className="min-h-screen p-4">
+      <div className="max-w-[375px] mx-auto px-5 pb-24 bg-white">
         <header className="pt-6 pb-4 text-center">
           <h1 className="text-2xl font-bold mb-2">회원가입 약관동의</h1>
         </header>
