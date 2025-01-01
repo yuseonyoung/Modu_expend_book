@@ -1,12 +1,12 @@
 'use client'
 
 import Link from 'next/link'
-import { login, LoginState } from '@/app/login/ui/Actions'
+import { login, LoginState } from './Actions'
 import { useActionState } from 'react'
 
 export default function LoginPage() {
   const initialState: LoginState = {
-    success: false,
+    success: false, 
     error: undefined
   }
   
@@ -108,8 +108,8 @@ export default function LoginPage() {
         </div>
 
         <div className="mt-6 flex justify-center space-x-4 text-sm">
-          <Link href="/forgot-password" className="text-gray-600 hover:text-gray-900">
-            ID/PW 찾기
+          <Link href="/login/search" className="text-gray-600 hover:text-gray-900">
+            아이디 / 비밀번호 찾기
           </Link>
           <span className="text-gray-300">|</span>
           <Link href="/signup" className="text-gray-600 hover:text-gray-900">
