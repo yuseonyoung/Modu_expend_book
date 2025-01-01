@@ -3,10 +3,13 @@ import { Noto_Sans_KR } from 'next/font/google'
 import '@/app/globals.css'
 import LayoutClient from '@/app/layoutClient'
 
-const notoSansKR = Noto_Sans_KR({ subsets: ['latin'] })
+const notoSansKR = Noto_Sans_KR({ 
+  subsets: ['latin'],
+  weight: ['400', '500', '700']
+})
 
 export const metadata: Metadata = {
-  title: '예산 관리',
+  title: '모두의 가계부',
   description: '개인 예산 관리 대시보드',
   manifest: '/manifest.json',
   themeColor: '#ffffff',
