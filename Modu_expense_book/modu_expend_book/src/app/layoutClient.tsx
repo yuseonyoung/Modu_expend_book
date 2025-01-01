@@ -5,7 +5,6 @@ import { usePathname } from 'next/navigation'
 import Header from '@/components/Header'
 import Sidebar from '@/components/Sidebar'
 import MobileNavbar from '@/components/MobileNavbar'
-
 export default function LayoutClient({
   children,
 }: {
@@ -13,7 +12,8 @@ export default function LayoutClient({
 }) {
   const [isMobile, setIsMobile] = useState(false)
   const pathname = usePathname()
-  const isLoginPage = pathname.startsWith('/login')
+  // 로그인과 회원가입 페이지 체크
+  const isAuthPage = pathname.startsWith('/login') || pathname.startsWith('/signup')
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768)
@@ -22,8 +22,8 @@ export default function LayoutClient({
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  // 로그인 페이지일 경우 네비게이션 요소들 없이 children만 반환
-  if (isLoginPage) {
+  // 로그인 또는 회원가입 페이지일 경우 네비게이션 요소들 없이 children만 반환
+  if (isAuthPage) {
     return <>{children}</>
   }
 
