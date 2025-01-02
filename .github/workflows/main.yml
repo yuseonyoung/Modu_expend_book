@@ -1,5 +1,4 @@
 name: CI for Next.js
-
 on:
   push:
     branches:
@@ -7,10 +6,13 @@ on:
   pull_request:
     branches:
       - main
-
 jobs:
   build:
     runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: ./Modu_expense_book/modu_expend_book # 작업 디렉토리 기본값 설정
     
     steps:
     - name: Checkout code
@@ -19,8 +21,8 @@ jobs:
     - name: Cache dependencies
       uses: actions/cache@v2
       with:
-        path: node_modules
-        key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+        path: ./Modu_expense_book/modu_expend_book/node_modules # 캐시 경로 수정
+        key: ${{ runner.os }}-node-${{ hashFiles('Modu_expense_book/modu_expend_book/package-lock.json') }} # 경로 수정
         restore-keys: |
           ${{ runner.os }}-node-
           
