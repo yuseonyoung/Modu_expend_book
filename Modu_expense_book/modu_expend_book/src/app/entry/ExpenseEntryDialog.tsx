@@ -17,7 +17,7 @@ export default function ExpenseEntryDialog({ buttonStyle, buttonText }: ExpenseE
   const [inputValues, setInputValues] = useState<number[]>([0, 0, 0])
   const [selectedCategory, setSelectedCategory] = useState<string>('전체')
 
-  useEffect(() => {
+  useEffect(() => { 
     setIsMounted(true)
   }, [])
 
