@@ -24,14 +24,14 @@ export default function ExpenseEntryDialog({ buttonStyle, buttonText }: ExpenseE
   if (!isMounted) {
     return <button className={buttonStyle}>{buttonText}</button>
   }
-
+ 
   const handleAmountChange = (index: number, value: string) => {
     const newValues = [...inputValues]
     newValues[index] = Number(value) || 0
     setInputValues(newValues)
     setTotalAmount(newValues.reduce((sum, current) => sum + current, 0))
   }
-
+ 
   const resetValues = () => {
     setInputValues([0, 0, 0])
     setTotalAmount(0)
