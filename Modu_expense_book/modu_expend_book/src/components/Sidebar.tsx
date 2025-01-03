@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 const menuItems = [
-  { icon: 'fa-home', text: '대시보드', href: '/' },
+  { icon: 'fa-home', text: '대시보드', href: '/dashboard' },
   { icon: 'fa-chart-bar', text: '통계', href: '/statistics' },
   { icon: 'fa-users', text: '커뮤니티', href: '/community' },
   { icon: 'fa-user', text: '내정보', href: '/profile' }
