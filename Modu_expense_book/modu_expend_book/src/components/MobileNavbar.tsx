@@ -14,27 +14,29 @@ export default function MobileNavbar() {
       safe-area-inset-bottom
     ">
       <div className="grid grid-cols-4 py-3">
-        <NavItem icon="fa-home" label="홈" active />
-        <NavItem icon="fa-chart-line" label="통계" />
-        <NavItem icon="fa-calendar" label="캘린더" />
-        <NavItem icon="fa-user" label="내정보" />
+        <NavItem href="/dashboard" icon="fa-home" label="홈" active />
+        <NavItem href="/statistics" icon="fa-chart-line" label="통계" />
+        <NavItem href="/calendar" icon="fa-calendar" label="캘린더" />
+        <NavItem href="/profile" icon="fa-user" label="내정보" />
       </div>
     </nav>
   )
 }
 
 function NavItem({
+  href,
   icon,
   label,
   active = false
 }: {
+  href: string;
   icon: string;
   label: string;
   active?: boolean
 }) {
   return (
     <Link
-      href="#"
+      href={href}
       className={`
         flex 
         flex-col 
