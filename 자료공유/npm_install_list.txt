@@ -48,6 +48,7 @@ npm install lucide-react
 npm install date-fns
 
 npm install @radix-ui/react-toast
-
+npm install @chakra-ui/react @emotion/react @emotion/styled framer-motion
+npm install iron-session
 /***********************************************************************************************/
 
