@@ -20,7 +20,7 @@ export const OAUTH_CONFIG = {
       client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!,
       client_secret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET!,
       redirect_uri: `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/google/callback`,
-      auth_url: 'https://accounts.google.com/o/oauth2/v2/auth',
+      auth_url: 'https://accounts.google.com/o/oauth2/v2/auth', 
       token_url: 'https://oauth2.googleapis.com/token',
       userinfo_url: 'https://www.googleapis.com/oauth2/v3/userinfo'
     }
