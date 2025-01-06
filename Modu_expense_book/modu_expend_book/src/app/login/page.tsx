@@ -18,6 +18,7 @@ export default function LoginPage() {
     const authService = new AuthService();
     const naverProvider = authService.getProvider('naver');
     const authUrl = naverProvider.generateAuthUrl();
+    console.log('Auth URL:', authUrl); // URL 확인용
     window.location.href = authUrl;
   };
 
